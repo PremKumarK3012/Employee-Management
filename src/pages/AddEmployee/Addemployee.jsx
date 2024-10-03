@@ -153,6 +153,7 @@ const Addemployee = () => {
                 name="Image"
                 style={{ display: "none" }} // Hide the input field
                 onChange={handleChange} // Handle the image upload
+                required
               />
             </label>
           </div>
@@ -277,7 +278,7 @@ const Addemployee = () => {
           </div>
           {/* Button For Submit and Cancel To Create Employee */}
           <div className="sub-btn">
-            <button className="can-btn" type="button" onClick={navigate("/")}>
+            <button className="can-btn" type="button">
               Cancel
             </button>
             <button type="submit">Confirm</button>

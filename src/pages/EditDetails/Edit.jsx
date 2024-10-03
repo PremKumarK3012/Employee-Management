@@ -148,7 +148,7 @@ const Edit = () => {
                 </span>
               )}
 
-              {/* Hidden file input */}
+              {/* file input */}
               <input
                 type="file"
                 accept=".png, .jpeg, .jpg"
@@ -156,6 +156,7 @@ const Edit = () => {
                 name="Image"
                 style={{ display: "none" }}
                 onChange={handleChange}
+                required
               />
             </label>
           </div>
