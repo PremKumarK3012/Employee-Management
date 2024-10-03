@@ -90,10 +90,6 @@ const Edit = () => {
     }
   };
 
-  const handleCancel = () => {
-    navigate("/");
-  };
-
   return (
     <div className="contain">
       {/* Form Starts From Here */}
@@ -280,10 +276,7 @@ const Edit = () => {
           </div>
           {/* Buttons For Submit and Cancel to update Employee  */}
           <div className="sub-btn">
-            <button className="can-btn" onClick={handleCancel}>
-              {" "}
-              Cancel
-            </button>
+            <button className="can-btn"> Cancel</button>
             <button type="submit"> Update</button>
           </div>
         </div>

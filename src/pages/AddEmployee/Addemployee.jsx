@@ -79,10 +79,6 @@ const Addemployee = () => {
     }
   };
 
-  const handleCancel = () => {
-    navigate("/");
-  };
-
   return (
     <div className="contain">
       {/* Form Container */}
@@ -282,7 +278,7 @@ const Addemployee = () => {
           </div>
           {/* Button For Submit and Cancel To Create Employee */}
           <div className="sub-btn">
-            <button className="can-btn" type="button" onClick={handleCancel}>
+            <button className="can-btn" type="button">
               Cancel
             </button>
             <button type="submit">Confirm</button>
