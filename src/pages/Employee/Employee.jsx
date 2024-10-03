@@ -17,7 +17,9 @@ const Employee = () => {
 
   const fetchdata = () => {
     axios
-      .get("http://localhost:3000/employee/getAll")
+      .get(
+        "https://employee-management-server-1gh8.onrender.com/employee/getAll"
+      )
       .then((res) => {
         setData(res.data.data);
         setFilteremp(res.data.data);
@@ -52,7 +54,9 @@ const Employee = () => {
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:3000/employee/delete/${selectedId}`)
+      .delete(
+        `https://employee-management-server-1gh8.onrender.com/employee/delete/${selectedId}`
+      )
       .then((res) => {
         toast.success(res.data.message);
         fetchdata();

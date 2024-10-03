@@ -18,7 +18,7 @@ const App = () => {
     Project: "",
     Type: "",
     Status: "",
-    Image: "",
+    Image: null,
   });
   const [selectedId, setSelectedId] = useState("");
 

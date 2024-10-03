@@ -11,7 +11,9 @@ const ViewEmployee = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/employee/getById/${selectedId}`)
+      .get(
+        `https://employee-management-server-1gh8.onrender.com/employee/getById/${selectedId}`
+      )
       .then((res) => {
         setData(res.data.response);
         // console.log(res.data);

@@ -67,6 +67,12 @@
 .custum-file-upload input {
   display: none;
 }
+
+.custum-file-upload img {
+  width: 97px;
+  height: 97px;
+  border-radius: 10px;
+}
 .custum-file-upload span {
   margin-left: 60px;
   margin-top: 60px;
