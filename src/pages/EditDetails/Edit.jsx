@@ -82,11 +82,16 @@ const Edit = () => {
         }
       );
       toast.success(response.data.message);
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {
       setLoading(false); // Stop loading
     }
+  };
+
+  const handleCancel = () => {
+    navigate("/");
   };
 
   return (
@@ -275,7 +280,10 @@ const Edit = () => {
           </div>
           {/* Buttons For Submit and Cancel to update Employee  */}
           <div className="sub-btn">
-            <button className="can-btn"> Cancel</button>
+            <button className="can-btn" onClick={handleCancel}>
+              {" "}
+              Cancel
+            </button>
             <button type="submit"> Update</button>
           </div>
         </div>
