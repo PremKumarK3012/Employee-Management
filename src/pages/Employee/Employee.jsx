@@ -255,6 +255,7 @@ const Employee = () => {
                   backgroundColor: "#df3545",
                 }}
                 data-dismiss="modal"
+                onClick={handleDelete}
               >
                 Confirm
               </button>
