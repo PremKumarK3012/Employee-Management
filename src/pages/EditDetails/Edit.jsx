@@ -82,7 +82,6 @@ const Edit = () => {
         }
       );
       toast.success(response.data.message);
-      navigate("/"); // Redirect after successful update
     } catch (error) {
       toast.error(error.message);
     } finally {

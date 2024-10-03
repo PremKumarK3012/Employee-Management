@@ -211,7 +211,7 @@ const Employee = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="deleteModalLabel">
-                Confirm Deletion
+                <i className="bi bi-trash"></i> Confirm Deletion
               </h5>
               <button
                 type="button"
