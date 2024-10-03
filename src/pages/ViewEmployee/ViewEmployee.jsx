@@ -1,14 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./View.css";
-import Context from "../../Mycontext/Context";
+
 import axios from "axios";
+import Context from "../../Mycontext/Context";
+import "./View.css";
 
 const ViewEmployee = () => {
   const { selectedId, setData, data } = useContext(Context);
-  console.log(selectedId);
-  console.log(data);
+  // console.log(selectedId);
+  // console.log(data);
 
+  // Fetching Data From API
   useEffect(() => {
     axios
       .get(
@@ -17,14 +19,13 @@ const ViewEmployee = () => {
       .then((res) => {
         setData(res.data.response);
         // console.log(res.data);
-
-        // setFilteremp(res.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className="contain">
+      {/* Fom Starts Here */}
       <form>
         <div>
           <div className="head">

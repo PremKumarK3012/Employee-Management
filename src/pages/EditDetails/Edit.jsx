@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import Context from "../../Mycontext/Context";
-import "./Edit.css";
 import { Link, useNavigate } from "react-router-dom";
+
+import Context from "../../Mycontext/Context";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Edit = () => {
@@ -65,6 +66,7 @@ const Edit = () => {
     formData.append("Type", data.Type);
     formData.append("Status", data.Status);
 
+    // Fetching Data From API
     if (data.Image) {
       formData.append("Image", data.Image); // Append the image file
     }
@@ -90,6 +92,7 @@ const Edit = () => {
 
   return (
     <div className="contain">
+      {/* Form Starts From Here */}
       <form onSubmit={handleSubmit}>
         <div>
           <div className="head">
@@ -195,7 +198,7 @@ const Edit = () => {
                 required
               >
                 <option value="" disabled>
-                  Select your Type
+                  Select your Department
                 </option>
                 <option>Engineering</option>
                 <option>Project Management</option>
@@ -270,9 +273,12 @@ const Edit = () => {
               <label>Status*</label>
             </div>
           </div>
-
+          {/* Buttons For Submit and Cancel to update Employee  */}
           <div className="sub-btn">
-            <button className="can-btn"> Cancel</button>
+            <button className="can-btn" onClick={navigate("/")}>
+              {" "}
+              Cancel
+            </button>
             <button type="submit"> Update</button>
           </div>
         </div>

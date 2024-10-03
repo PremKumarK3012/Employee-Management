@@ -1,12 +1,11 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { Context } from "../../Mycontext/Context";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Addemployee = () => {
-  // const { setData } = useContext(Context);
   const [value, setValue] = useState({
     EmployeeName: "",
     EmployeeID: "",
@@ -18,10 +17,11 @@ const Addemployee = () => {
     Image: null,
   });
 
-  const fileRef = useRef();
   const [loading, setLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+  const navigate = useNavigate();
 
+  // Handle input change
   const handleChange = (e) => {
     const { name, value, files, type } = e.target;
     setValue((prevValues) => ({
@@ -37,6 +37,8 @@ const Addemployee = () => {
       reader.readAsDataURL(file); // Convert image file to base64
     }
   };
+
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Set loading to true when submission starts
@@ -67,7 +69,7 @@ const Addemployee = () => {
       );
 
       toast.success(response.data.message);
-      handleReset();
+      navigate("/");
     } catch (error) {
       if (error.code === "ECONNABORTED") {
         toast.error("Request timeout. Please try again.");
@@ -77,24 +79,9 @@ const Addemployee = () => {
     }
   };
 
-  const handleReset = () => {
-    setValue({
-      EmployeeName: "",
-      EmployeeID: "",
-      Department: "",
-      Designation: "",
-      Project: "",
-      Type: "",
-      Status: "",
-      Image: null,
-    });
-    if (fileRef.current) {
-      fileRef.current.value = "";
-    }
-  };
-
   return (
     <div className="contain">
+      {/* Form Container */}
       <form onSubmit={handleSubmit}>
         <ToastContainer />
         <div>
@@ -171,7 +158,7 @@ const Addemployee = () => {
             </label>
           </div>
 
-          {/* Other input fields like EmployeeName, EmployeeID, etc. */}
+          {/* Other input fields  */}
 
           <div className="d-flex">
             <div class="formContainer">
@@ -209,6 +196,9 @@ const Addemployee = () => {
                 id="Department"
                 required
               >
+                <option value="" disabled>
+                  Select your Department
+                </option>
                 <option>Engineering</option>
                 <option>Project Management</option>
                 <option>Cloud Services</option>
@@ -225,6 +215,9 @@ const Addemployee = () => {
                 id="Designation"
                 required
               >
+                <option value="" disabled>
+                  Select your Designation
+                </option>
                 <option>Software Engineer</option>
                 <option>Full Stack Developer</option>
                 <option>Front End Developer</option>
@@ -283,9 +276,9 @@ const Addemployee = () => {
               <label>Status*</label>
             </div>
           </div>
-
+          {/* Button For Submit and Cancel To Create Employee */}
           <div className="sub-btn">
-            <button className="can-btn" type="button" onClick={handleReset}>
+            <button className="can-btn" type="button" onClick={navigate("/")}>
               Cancel
             </button>
             <button type="submit">Confirm</button>
@@ -297,12 +290,3 @@ const Addemployee = () => {
 };
 
 export default Addemployee;
-{
-  /* <input
-type="file"
-accept=".png, .jpeg, .jpg"
-id="Image"
-name="Image"
-onChange={handleChange}
-/> */
-}

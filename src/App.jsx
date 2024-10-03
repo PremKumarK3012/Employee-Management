@@ -1,15 +1,18 @@
-import Sidebar from "./pages/Sidebar/Sidebar";
-import { Route, Routes } from "react-router-dom";
-import Navbar from "./pages/Navbar/Navbar";
+import React, { useState } from "react";
 import "./App.css";
-import Employee from "./pages/Employee/Employee";
-import Addemployee from "./pages/AddEmployee/Addemployee";
+
+import Navbar from "./pages/Navbar/Navbar";
 import Edit from "./pages/EditDetails/Edit";
-import { Context } from "./Mycontext/Context";
-import { useState, useEffect } from "react";
+import Sidebar from "./pages/Sidebar/Sidebar";
+import Employee from "./pages/Employee/Employee";
 import ViewEmployee from "./pages/ViewEmployee/ViewEmployee";
-import axios from "axios";
+import Addemployee from "./pages/AddEmployee/Addemployee";
+
+import { Route, Routes } from "react-router-dom";
+import { Context } from "./Mycontext/Context";
+
 const App = () => {
+  const [selectedId, setSelectedId] = useState("");
   const [data, setData] = useState({
     EmployeeName: "",
     EmployeeID: "",
@@ -20,9 +23,6 @@ const App = () => {
     Status: "",
     Image: null,
   });
-  const [selectedId, setSelectedId] = useState("");
-
-  // Fetching the All Employee data
 
   return (
     <div>
@@ -35,7 +35,7 @@ const App = () => {
           <div className="nav">
             <Navbar />
           </div>
-          <Context.Provider
+          <Context.Provider // wrapping the contextApi
             value={{ data, setData, selectedId, setSelectedId }}
           >
             <Routes>

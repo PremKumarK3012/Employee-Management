@@ -1,20 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Employee.css";
-import { Link, useNavigate } from "react-router-dom";
 import Context from "../../Mycontext/Context";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+
+import "./Employee.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const Employee = () => {
   const { data, setData, selectedId, setSelectedId } = useContext(Context);
   const [filteremp, setFilteremp] = useState([]);
   const navigate = useNavigate();
 
+  // Handle the fetching data from api starts here
   useEffect(() => {
     fetchdata();
   }, []);
-
   const fetchdata = () => {
     axios
       .get(
@@ -27,20 +29,24 @@ const Employee = () => {
       .catch((err) => console.log(err));
   };
 
+  // Handle Delete employee
   const handleDeleteClick = (emp) => {
     setSelectedId(emp);
   };
 
+  // Handle view employee
   const handleViewClick = (emp) => {
     setSelectedId(emp);
     navigate("view");
   };
 
+  // Handle edit employee
   const handleEditClick = (emp) => {
     setSelectedId(emp);
     navigate("edit");
   };
 
+  // Handle Search employee
   const handleSearch = (e) => {
     const searchText = e.target.value.toLowerCase();
     const filteredemp = data.filter((employee) => {
@@ -52,6 +58,7 @@ const Employee = () => {
     setFilteremp(filteredemp);
   };
 
+  // Handle Delete employee
   const handleDelete = () => {
     axios
       .delete(
@@ -115,7 +122,7 @@ const Employee = () => {
             </div>
           </div>
         </div>
-
+        {/* Employee Table starts here */}
         <div className="table-container">
           <table>
             <thead>
@@ -130,6 +137,8 @@ const Employee = () => {
                 <td colSpan={5}>Action</td>
               </tr>
             </thead>
+
+            {/* Mapping The Data */}
             {filteremp && filteremp.length > 0 ? (
               <tbody>
                 {filteremp.map((emp, i) => (
@@ -149,23 +158,14 @@ const Employee = () => {
                     <td>{emp.Type}</td>
                     <td>{emp.Status}</td>
                     <td>
-                      <button
-                        // data-toggle="modal"
-                        // data-target="#deleteModal"
-                        onClick={() => handleViewClick(emp._id)}
-                      >
+                      {/* CRUD BUTTONS */}
+                      <button onClick={() => handleViewClick(emp._id)}>
                         <span>
-                          {" "}
                           <i className="bi bi-eye"></i>
                         </span>
                       </button>
-                      <button
-                        // data-toggle="modal"
-                        // data-target="#deleteModal"
-                        onClick={() => handleEditClick(emp._id)}
-                      >
+                      <button onClick={() => handleEditClick(emp._id)}>
                         <span>
-                          {" "}
                           <i className="bi bi-pencil-square"></i>
                         </span>
                       </button>
@@ -193,8 +193,9 @@ const Employee = () => {
             )}
           </table>
         </div>
+        {/* Employee Table endss here */}
       </div>
-      {/* Modal */}
+      {/* Delete Modal starts here*/}
       <div
         className="modal fade"
         id="deleteModal"
@@ -203,7 +204,10 @@ const Employee = () => {
         aria-labelledby="deleteModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog" role="document">
+        <div
+          className="modal-dialog modal-dialog-centered d-flex justify-content-center"
+          role="document"
+        >
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="deleteModalLabel">
@@ -241,6 +245,8 @@ const Employee = () => {
           </div>
         </div>
       </div>
+
+      {/* Delete Modal ends here*/}
     </>
   );
 };
