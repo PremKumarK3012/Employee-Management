@@ -153,7 +153,6 @@ const Addemployee = () => {
                 name="Image"
                 style={{ display: "none" }} // Hide the input field
                 onChange={handleChange} // Handle the image upload
-                ref={fileRef}
               />
             </label>
           </div>
