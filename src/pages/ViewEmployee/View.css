@@ -1,0 +1,28 @@
+.view-formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.view-formContainer span {
+  margin-top: 10px;
+}
+
+.view-formContainer label {
+  color: rgb(107, 106, 106);
+}
+
+.view-bor {
+  width: 90%;
+  border-bottom: 1px solid rgb(176, 173, 173);
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.custum-file-upload img {
+  width: 97px;
+  height: 97px;
+  border-radius: 10px;
+}
