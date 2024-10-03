@@ -127,7 +127,7 @@ const Addemployee = () => {
             <label className="custum-file-upload" htmlFor="Image">
               {imagePreview ? (
                 // Show the image preview after the image is uploaded
-                <img src={imagePreview} alt="Preview" ref={fileRef} />
+                <img src={imagePreview} alt="Preview" />
               ) : (
                 // Initially show the SVG camera icon
                 <svg
