@@ -58,6 +58,8 @@ const Edit = () => {
     setLoading(true); // Start loading
 
     const formData = new FormData();
+
+    // Append all form data fields including non-file fields
     formData.append("EmployeeName", data.EmployeeName);
     formData.append("EmployeeID", data.EmployeeID);
     formData.append("Department", data.Department);
@@ -66,9 +68,9 @@ const Edit = () => {
     formData.append("Type", data.Type);
     formData.append("Status", data.Status);
 
-    // Fetching Data From API
+    // Append the image file if it exists
     if (data.Image) {
-      formData.append("Image", data.Image); // Append the image file
+      formData.append("Image", data.Image);
     }
 
     try {
@@ -167,7 +169,7 @@ const Edit = () => {
               <input
                 placeholder=""
                 type="text"
-                value={data.EmployeeName || ""}
+                value={data.EmployeeName}
                 onChange={handleChange}
                 name="EmployeeName"
                 id="EmployeeName"
@@ -179,7 +181,7 @@ const Edit = () => {
               <input
                 placeholder=""
                 type="text"
-                value={data.EmployeeID || ""}
+                value={data.EmployeeID}
                 onChange={handleChange}
                 name="EmployeeID"
                 id="EmployeeID"
@@ -192,7 +194,7 @@ const Edit = () => {
           <div className="d-flex">
             <div className="formContainer">
               <select
-                value={data.Type || ""}
+                value={data.Type}
                 onChange={handleChange}
                 name="Type"
                 id="Type"
@@ -210,7 +212,7 @@ const Edit = () => {
             </div>
             <div className="formContainer">
               <select
-                value={data.Designation || ""}
+                value={data.Designation}
                 onChange={handleChange}
                 name="Designation"
                 id="Designation"
@@ -234,7 +236,7 @@ const Edit = () => {
               <input
                 placeholder=""
                 type="text"
-                value={data.Project || ""}
+                value={data.Project}
                 onChange={handleChange}
                 name="Project"
               />
@@ -242,7 +244,7 @@ const Edit = () => {
             </div>
             <div className="formContainer">
               <select
-                value={data.Type || ""}
+                value={data.Type}
                 onChange={handleChange}
                 name="Type"
                 id="Type"
@@ -267,7 +269,7 @@ const Edit = () => {
                 type="text"
                 name="Status"
                 id="Status"
-                value={data.Status || ""}
+                value={data.Status}
                 onChange={handleChange}
                 required
               />
