@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Edit = () => {
   const { selectedId, setData, data } = useContext(Context);
+
+  const [modifiedFields, setModifiedFields] = useState({}); // Track modified fields
   const navigate = useNavigate();
 
   // Set loading and image preview states
@@ -28,6 +30,7 @@ const Edit = () => {
   }, [selectedId, setData]);
 
   // Handle image change
+
   const handleChange = (e) => {
     const { name, value, files, type } = e.target;
 
@@ -45,7 +48,13 @@ const Edit = () => {
     } else {
       setData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: value, // For other inputs, store the input value in data
+      }));
+
+      // Track the modified fields
+      setModifiedFields((prevModifiedFields) => ({
+        ...prevModifiedFields,
+        [name]: true, // Mark this field as modified
       }));
     }
   };
@@ -57,18 +66,27 @@ const Edit = () => {
 
     const formData = new FormData();
 
-    // Only append the fields that were changed (i.e., are present in `data`)
-    if (data.EmployeeName) formData.append("EmployeeName", data.EmployeeName);
-    if (data.EmployeeID) formData.append("EmployeeID", data.EmployeeID);
-    if (data.Department) formData.append("Department", data.Department);
-    if (data.Designation) formData.append("Designation", data.Designation);
-    if (data.Project) formData.append("Project", data.Project);
-    if (data.Type) formData.append("Type", data.Type);
-    if (data.Status) formData.append("Status", data.Status);
+    // Only append the fields that were changed (tracked in modifiedFields)
+    if (modifiedFields.EmployeeName)
+      formData.append("EmployeeName", data.EmployeeName);
+    if (modifiedFields.EmployeeID)
+      formData.append("EmployeeID", data.EmployeeID);
+    if (modifiedFields.Department)
+      formData.append("Department", data.Department);
+    if (modifiedFields.Designation)
+      formData.append("Designation", data.Designation);
+    if (modifiedFields.Project) formData.append("Project", data.Project);
+    if (modifiedFields.Type) formData.append("Type", data.Type);
+    if (modifiedFields.Status) formData.append("Status", data.Status);
 
     // Append the image file if it exists
-    if (data.Image) {
+    if (modifiedFields.Image && data.Image) {
       formData.append("Image", data.Image);
+    }
+
+    // Debug: Log FormData content before sending it
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
     }
 
     try {
@@ -85,6 +103,7 @@ const Edit = () => {
       navigate("/");
     } catch (error) {
       toast.error("Failed to update employee data");
+      console.error("Error:", error);
     } finally {
       setLoading(false); // Stop loading
     }
