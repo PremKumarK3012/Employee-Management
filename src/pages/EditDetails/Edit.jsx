@@ -315,7 +315,6 @@ const Edit = () => {
   const handleChange = (e) => {
     const { name, value, files, type } = e.target;
 
-    // If the input is a file (image)
     if (type === "file" && files.length > 0) {
       const file = files[0];
       const reader = new FileReader();
@@ -328,10 +327,9 @@ const Edit = () => {
         [name]: file, // Update the data with the file
       }));
     } else {
-      // For other inputs, update the corresponding field in data
       setData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: value, // Update the text inputs in data state
       }));
     }
   };
