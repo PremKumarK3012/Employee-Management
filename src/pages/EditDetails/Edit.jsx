@@ -22,7 +22,7 @@ const Edit = () => {
       )
       .then((res) => {
         setData(res.data.response); // Set employee data from API response
-        setImagePreview(res.data.response.Image); // Set the initial image preview from the response
+        setImagePreview(res.data.response.Image); // Set the initial image preview
       })
       .catch((err) => console.log(err));
   }, [selectedId, setData]);
@@ -57,18 +57,18 @@ const Edit = () => {
 
     const formData = new FormData();
 
-    // Append all form data fields including non-file fields
-    formData.append("EmployeeName", data.EmployeeName || "");
-    formData.append("EmployeeID", data.EmployeeID || "");
-    formData.append("Department", data.Department || "");
-    formData.append("Designation", data.Designation || "");
-    formData.append("Project", data.Project || "");
-    formData.append("Type", data.Type || "");
-    formData.append("Status", data.Status || "");
+    // Only append the fields that were changed (i.e., are present in `data`)
+    if (data.EmployeeName) formData.append("EmployeeName", data.EmployeeName);
+    if (data.EmployeeID) formData.append("EmployeeID", data.EmployeeID);
+    if (data.Department) formData.append("Department", data.Department);
+    if (data.Designation) formData.append("Designation", data.Designation);
+    if (data.Project) formData.append("Project", data.Project);
+    if (data.Type) formData.append("Type", data.Type);
+    if (data.Status) formData.append("Status", data.Status);
 
     // Append the image file if it exists
     if (data.Image) {
-      formData.append("Image", data.Image); // Append the image file to formData
+      formData.append("Image", data.Image);
     }
 
     try {
