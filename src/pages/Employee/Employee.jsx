@@ -46,7 +46,7 @@ const Employee = () => {
     navigate("edit");
   };
 
-  // Handle Search employee
+  // Handle Search employee name
   const handleSearch = (e) => {
     const searchText = e.target.value.toLowerCase();
     const filteredemp = data.filter((employee) => {
