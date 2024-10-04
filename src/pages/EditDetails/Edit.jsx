@@ -31,7 +31,6 @@ const Edit = () => {
   const handleChange = (e) => {
     const { name, value, files, type } = e.target;
 
-    // If file is uploaded (for image input)
     if (type === "file" && files.length > 0) {
       const file = files[0];
       const reader = new FileReader();
@@ -44,7 +43,6 @@ const Edit = () => {
         [name]: file, // Store file in the data state
       }));
     } else {
-      // For other inputs
       setData((prevData) => ({
         ...prevData,
         [name]: value,
@@ -60,17 +58,17 @@ const Edit = () => {
     const formData = new FormData();
 
     // Append all form data fields including non-file fields
-    formData.append("EmployeeName", data.EmployeeName);
-    formData.append("EmployeeID", data.EmployeeID);
-    formData.append("Department", data.Department);
-    formData.append("Designation", data.Designation);
-    formData.append("Project", data.Project);
-    formData.append("Type", data.Type);
-    formData.append("Status", data.Status);
+    formData.append("EmployeeName", data.EmployeeName || "");
+    formData.append("EmployeeID", data.EmployeeID || "");
+    formData.append("Department", data.Department || "");
+    formData.append("Designation", data.Designation || "");
+    formData.append("Project", data.Project || "");
+    formData.append("Type", data.Type || "");
+    formData.append("Status", data.Status || "");
 
     // Append the image file if it exists
     if (data.Image) {
-      formData.append("Image", data.Image);
+      formData.append("Image", data.Image); // Append the image file to formData
     }
 
     try {
@@ -86,7 +84,7 @@ const Edit = () => {
       toast.success(response.data.message);
       navigate("/");
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Failed to update employee data");
     } finally {
       setLoading(false); // Stop loading
     }
